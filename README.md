@@ -1,6 +1,35 @@
-# Algorithms UTN 2024
+# Exercise 1
 
-On this repo I'll be uploading all the practices I do on this subject to help anyone who's stuck in some or other exercise so we can learn together 😎.
-Fork the repo if helps you and give me a star if it was helpful ⭐️.
+# Exercise 2
 
-Keep it up!
+# Exercise 3
+
+# Exercise 4
+
+# Exercise 5
+
+# Exercise 6
+
+# Exercise 7
+
+# Exercise 8
+
+# Exercise 9
+
+# Exercise 10
+
+# Exercise 11
+
+# Exercise 12
+
+# Exercise 13
+
+# Exercise 14
+
+# Exercise 15
+
+# Exercise 16
+
+# Exercise 17
+
+# Exercise 18
