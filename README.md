@@ -16,7 +16,7 @@
 
 # Exercise 9 ✅
 
-# Exercise 10
+# Exercise 10 ✅
 
 # Exercise 11
 
