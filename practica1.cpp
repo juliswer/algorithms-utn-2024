@@ -222,12 +222,24 @@ void exerciseTen(const float* arrOfPayments, int arrLength) {
     std::cout << std::endl;
 }
 
+void exerciseEleven(const int* values, int arrLength) {
+    int highestNumber = -1;
+
+    for(int i = 0; i < arrLength; i++) {
+        // if the current number being analyzed is higher than the previous one, it means it's the highest in the array.
+        if(values[i] > values[i - 1])
+            highestNumber = values[i];
+    }
+
+    std::cout << "Highest Number: " << highestNumber << '\n';
+}
+
 
 int main() {
-    float arrOfPayments[] = {1519, 1518, 1517, 1516, 0};
-    int arrOfPaymentsLength = sizeof(arrOfPayments) / sizeof(arrOfPayments[0]);
+    int values[] = {10, 1, 5, 1, 5, 11, 0};
+    int valuesLength = sizeof(values) / sizeof(values[0]);
 
-    exerciseTen(arrOfPayments, arrOfPaymentsLength);
+    exerciseEleven(values, valuesLength);
 
     return 0;
 }
