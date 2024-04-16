@@ -30,10 +30,13 @@ void exerciseThree() {
 }
 
 void exerciseFour(int valueOne, int valueTwo, int valueThree) {
-    if(valueOne == valueTwo == valueThree)
+    if((valueOne + valueTwo) > valueThree)
         std::cout << "Forman Triangulo";
-    else
-        std::cout << "No Forman Triangulo";
+    if((valueOne + valueThree) > valueTwo)
+        std::cout << "Forman Triangulo";
+    if((valueTwo + valueThree) > valueOne) {
+        std::cout << "Forman Triangulo";
+    }
 }
 
 void exerciseFive(int ladoUno, int ladoDos, int ladoTres) {
@@ -235,11 +238,104 @@ void exerciseEleven(const int* values, int arrLength) {
 }
 
 
-int main() {
-    int values[] = {10, 1, 5, 1, 5, 11, 0};
-    int valuesLength = sizeof(values) / sizeof(values[0]);
+struct BirthDate {
+    int day;
+    int month;
+    int year;
+};
 
-    exerciseEleven(values, valuesLength);
+struct Person {
+    std::string name;
+    BirthDate dateOfBirth;
+};
+
+BirthDate formatBirthDate(int dateOfBirth) {
+    BirthDate formattedBirthDate = {};
+
+    std::string numberString = std::to_string(dateOfBirth);
+
+    formattedBirthDate.day = std::stoi(numberString.substr(6, 2));
+    formattedBirthDate.month = std::stoi(numberString.substr(4, 2));
+    formattedBirthDate.year = std::stoi(numberString.substr(0, 4));
+
+    return formattedBirthDate;
+}
+
+bool isOlderHelper(BirthDate date1, BirthDate date2) {
+    // It's read like 'date1' is older than 'date2'
+    if(date1.year < date2.year)
+        return true;
+    if(date1.year == date2.year && date1.month < date2.month)
+        return true;
+    if(date1.year == date2.year && date1.month == date2.month && date1.day < date2.day) {
+        return true;
+    }
+
+    return false;
+}
+
+bool isYoungerHelper(BirthDate date1, BirthDate date2) {
+    // It's read like 'date1' is younger than 'date2'
+    if(date1.year > date2.year)
+        return true;
+    if(date1.year == date2.year && date1.month > date2.month)
+        return true;
+    if(date1.year == date2.year && date1.month == date2.month && date1.day > date2.day) {
+        return true;
+    }
+
+    return false;
+}
+
+void exerciseTwelve(const Person* arrOfPeople, int arrLength) {
+    Person oldestPerson;
+    Person youngestPerson;
+    for(int i = 0; i< arrLength; i++) {
+//        std::string numberString = std::to_string(arrOfPeople[i].dateOfBirth);
+
+
+        if(isOlderHelper(arrOfPeople[i].dateOfBirth, oldestPerson.dateOfBirth)) {
+            oldestPerson.name = arrOfPeople[i].name;
+            oldestPerson.dateOfBirth = arrOfPeople[i].dateOfBirth;
+        }
+
+        if(isYoungerHelper(arrOfPeople[i].dateOfBirth, oldestPerson.dateOfBirth)) {
+            youngestPerson = arrOfPeople[i];
+        }
+
+
+    }
+
+    std::cout << "Oldest: " << oldestPerson.name << '\n' << "He is: " << (2024 - oldestPerson.dateOfBirth.year) << " Years Old" << '\n';
+
+    std::cout << "Youngest: " << youngestPerson.name << '\n' << "He is: " << (2024 - youngestPerson.dateOfBirth.year) << " Years Old" << '\n';
+//    bool value = strcmp("", "");
+}
+
+
+int main() {
+//    Person peopleArray[3];
+//    peopleArray[0].name = "John";
+//    peopleArray[0].dateOfBirth = formatBirthDate(19940425);
+//
+//    peopleArray[1].name = "Daniel";
+//    peopleArray[1].dateOfBirth = formatBirthDate(19900421);
+//
+//    peopleArray[2].name = "Nicholas";
+//    peopleArray[2].dateOfBirth = formatBirthDate(20010402);
+//
+//    int peopleArrayLength = sizeof(peopleArray) / sizeof(peopleArray[0]);
+//
+//    exerciseTwelve(peopleArray, peopleArrayLength);
+
+    int i = 10;
+    std::cout << "Test" << i%6 << '\n';
+    do {
+        if((!(i%2) && i < 20) || (i > 20 && (i%3)))
+            std::cout << i << " ";
+
+        i++;
+    } while(i<= 30);
 
     return 0;
 }
