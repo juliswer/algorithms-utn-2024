@@ -287,29 +287,77 @@ bool isYoungerHelper(BirthDate date1, BirthDate date2) {
     return false;
 }
 
-void exerciseTwelve(const Person* arrOfPeople, int arrLength) {
-    Person oldestPerson;
-    Person youngestPerson;
-    for(int i = 0; i< arrLength; i++) {
-//        std::string numberString = std::to_string(arrOfPeople[i].dateOfBirth);
+//void exerciseTwelve(const Person* arrOfPeople, int arrLength) {
+//    Person oldestPerson;
+//    oldestPerson.dateOfBirth = formatBirthDate(19800404);
+//    Person youngestPerson;
+//    for(int i = 0; i< arrLength; i++) {
+//        if(isOlderHelper(arrOfPeople[i].dateOfBirth, oldestPerson.dateOfBirth)) {
+//            oldestPerson = arrOfPeople[i];
+//        }
+//        if(isYoungerHelper(arrOfPeople[i].dateOfBirth, oldestPerson.dateOfBirth)) {
+//            youngestPerson = arrOfPeople[i];
+//        }
+//    }
+//
+//    std::cout << "Oldest: " << oldestPerson.name << '\n' << "He is: " << (2024 - oldestPerson.dateOfBirth.year) << " Years Old" << '\n';
+//
+//    std::cout << "Youngest: " << youngestPerson.name << '\n' << "He is: " << (2024 - youngestPerson.dateOfBirth.year) << " Years Old" << '\n';
+////    bool value = strcmp("", "");
+//}
 
+void exerciseThirteen(const float* arrOfValues, int arrLength) {
+    float maxNegativeValue = 0;
+    float minPositiveValue = 0;
+    float minValueOnRange = 0;
+    float generalCounter = 0;
+    const float minValueRange = -17.3;
+    const float maxValueRange = 26.9;
 
-        if(isOlderHelper(arrOfPeople[i].dateOfBirth, oldestPerson.dateOfBirth)) {
-            oldestPerson.name = arrOfPeople[i].name;
-            oldestPerson.dateOfBirth = arrOfPeople[i].dateOfBirth;
+    for(int i = 0; arrOfValues[i] != '\0'; i++) {
+        generalCounter += arrOfValues[i];
+
+        if(arrOfValues[i] < 0) {
+            if(maxNegativeValue == 0)
+                maxNegativeValue = arrOfValues[i];
+            if(arrOfValues[i] > maxNegativeValue)
+                maxNegativeValue = arrOfValues[i];
         }
 
-        if(isYoungerHelper(arrOfPeople[i].dateOfBirth, oldestPerson.dateOfBirth)) {
-            youngestPerson = arrOfPeople[i];
+        if(arrOfValues[i] > 0) {
+            if(maxNegativeValue == 0)
+                minPositiveValue = arrOfValues[i];
+            if(arrOfValues[i] < minPositiveValue)
+                minPositiveValue = arrOfValues[i];
         }
 
-
+        if(arrOfValues[i] >= minValueRange && arrOfValues[i] <= maxValueRange) {
+            if(minValueOnRange == 0)
+                minValueOnRange = arrOfValues[i];
+            if(arrOfValues[i] <= minValueOnRange)
+                minValueOnRange = arrOfValues[i];
+        }
     }
 
-    std::cout << "Oldest: " << oldestPerson.name << '\n' << "He is: " << (2024 - oldestPerson.dateOfBirth.year) << " Years Old" << '\n';
+    if(maxNegativeValue == 0) {
+        std::cout << "NO HUBO VALOR MAXIMO NEGATIVO" << '\n';
+    } else {
+        std::cout << "VALOR MAXIMO NEGATIVO: " << maxNegativeValue << '\n';
+    }
 
-    std::cout << "Youngest: " << youngestPerson.name << '\n' << "He is: " << (2024 - youngestPerson.dateOfBirth.year) << " Years Old" << '\n';
-//    bool value = strcmp("", "");
+    if(minPositiveValue == 0) {
+        std::cout << "NO HUBO VALOR MINIMO POSITIVO" << '\n';
+    } else {
+        std::cout << "VALOR MINIMO POSITIVO: " << minPositiveValue << '\n';
+    }
+
+    if(minValueOnRange == 0) {
+        std::cout << "NO HUBO VALOR MINIMO EN RANGO" << '\n';
+    } else {
+        std::cout << "VALOR MINIMO DENTRO DEL RANGO: " << minValueRange << " y " << maxValueRange << " ES: " << minValueOnRange << '\n';
+    }
+
+    std::cout << "LA SUMA ES: " << generalCounter << " Y TIENE UN PROMEDIO DE: " << generalCounter / arrLength << '\n';
 }
 
 
@@ -327,15 +375,10 @@ int main() {
 //    int peopleArrayLength = sizeof(peopleArray) / sizeof(peopleArray[0]);
 //
 //    exerciseTwelve(peopleArray, peopleArrayLength);
+    float arrayOfElements[] = { 3.14, 2.718, 1.618, -1.4, -1.8, -1.2, 0.1, 24.2, -16.9, '\0' };
+    int arrLength = (sizeof(arrayOfElements) / sizeof(arrayOfElements[0]) - 1);
 
-    int i = 10;
-    std::cout << "Test" << i%6 << '\n';
-    do {
-        if((!(i%2) && i < 20) || (i > 20 && (i%3)))
-            std::cout << i << " ";
-
-        i++;
-    } while(i<= 30);
+    exerciseThirteen(arrayOfElements, arrLength);
 
     return 0;
 }
