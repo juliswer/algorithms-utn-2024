@@ -28,15 +28,15 @@ make <file.cpp> && ./file
 
 # Exercise 11 ✅
 
-# Exercise 12
+# Exercise 12 ❌
 
-# Exercise 13
+# Exercise 13 ✅
 
-# Exercise 14
+# Exercise 14 ✅
 
 # Exercise 15
 
-# Exercise 16
+# Exercise 16 ✅
 
 # Exercise 17
 
