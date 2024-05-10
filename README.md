@@ -34,10 +34,10 @@ make <file.cpp> && ./file
 
 # Exercise 14 ✅
 
-# Exercise 15
+# Exercise 15 ❌
 
 # Exercise 16 ✅
 
-# Exercise 17
+# Exercise 17 ✅
 
-# Exercise 18
+# Exercise 18 ❌
