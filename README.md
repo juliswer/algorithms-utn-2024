@@ -1,3 +1,11 @@
+# Environment Disclaimer
+All excercises were done on Mac OS with CLANG v15.0.0 as compiler.
+
+As a reminder: command to run a file:
+``
+make <file.cpp> && ./file
+``
+
 # Exercise 1 ✅
 
 # Exercise 2 ✅
