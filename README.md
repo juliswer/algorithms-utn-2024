@@ -40,4 +40,4 @@ make <file.cpp> && ./file
 
 # Exercise 17 ✅
 
-# Exercise 18 ❌
+# Exercise 18 ✅
