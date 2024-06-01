@@ -32,10 +32,10 @@ int busquedaBinaria(int vec[], int len, int num) {
         int medio = (izquierda + derecha) / 2;
         if(vec[medio] == num) {
             return medio;
-        } else if(vec[medio] >= num) {
-            derecha = vec[medio];
+        } else if(vec[medio] < num) {
+            izquierda = medio + 1;
         } else {
-            izquierda = vec[medio];
+            derecha = medio - 1;
         }
     }
 
