@@ -5,7 +5,6 @@ using namespace std;
 struct AuxMasProduccion {
     int fecha;
     int cantidad;
-    int codigo_linea;
 };
 
 struct Silla {
@@ -28,13 +27,13 @@ bool compararLineasCapacidad(const LineaProduccion& a, const LineaProduccion& b)
 void insertarLineaYOrdenar(LineaProduccion lineas[], int& len, LineaProduccion l);
 LineaProduccion encontrarLineaMayorCapacidad(LineaProduccion lineas[]);
 LineaProduccion lineaMasSillasProducidas(LineaProduccion lineas[], int len);
-int diaMasProductivo(LineaProduccion lineas[], int len);
 
 // --- sillas
 bool compararSillasFechaProduccion(const Silla& a, const Silla& b);
 void insertarSillaYOrdenar(Silla sillas[], int& len, Silla s);
 void mostrarSillas(Silla sillas[], int len);
 Silla sillaMasReciente(Silla sillas[]);
+int laMayorProd(Silla sillas[], int len);
 
 int main() {
     execute();
@@ -60,7 +59,7 @@ void execute() {
 
     insertarLineaYOrdenar(lineas, lineasLen, lineaAInsetar);
 
-    int sillasLen = 2;
+    int sillasLen = 4;
     Silla sillas[sillasLen];
     sillas[0].codigo = 0;
     sillas[0].codigo_linea = 1;
@@ -72,13 +71,25 @@ void execute() {
     sillas[1].fecha_produccion = 19900907;
     sillas[1].tipo_madera = "Roble";
 
+    sillas[2].codigo = 2;
+    sillas[2].codigo_linea = 3;
+    sillas[2].fecha_produccion = 20181209;
+    sillas[2].tipo_madera = "Roble";
+
+    sillas[3].codigo = 3;
+    sillas[3].codigo_linea = 3;
+    sillas[3].fecha_produccion = 20181209;
+    sillas[3].tipo_madera = "Roble";
+
     Silla sillaAInsertar;
     sillaAInsertar.codigo = 2;
     sillaAInsertar.codigo_linea = 3;
     sillaAInsertar.fecha_produccion = 20221218;
     sillaAInsertar.tipo_madera = "Abedul";
 
-    // insertarSillaYOrdenar(sillas, sillasLen, sillaAInsertar);
+    insertarSillaYOrdenar(sillas, sillasLen, sillaAInsertar);
+
+    int fecha = laMayorProd(sillas, sillasLen);    
 }
 
 bool compararLineasCapacidad(const LineaProduccion& a, const LineaProduccion& b) {
@@ -135,33 +146,38 @@ Silla sillaMasReciente(Silla sillas[]) {
     return sillas[0];
 }
 
-int diaMasProductivo(Silla sillas)
+int busquedaAuxiliarSec(AuxMasProduccion auxs[], int len, int fecha) {
+    int i = 0;
+
+    while(i < len && auxs[i].fecha != fecha) {
+        i++;
+    }
+
+    return i == len ? -1 : i;
+}
 
 // ! PUNTO 7
-// int diaMasProductivo(Silla sillas[], int len) {
-//     AuxMasProduccion masProd[len];
+int laMayorProd(Silla sillas[], int len) {
+    AuxMasProduccion unidades[len];
 
-//     for(int i = 0; i < len; i++) {
-//         masProd[i].fecha = sillas[i].fecha_produccion;
-//         masProd[i].codigo_linea = sillas[i].codigo_linea;
-//     }
+    for(int i = 0; i < len; i++) {
+        int fechaPos = busquedaAuxiliarSec(unidades, len, sillas[i].fecha_produccion);
+        if(fechaPos == -1) {
+            unidades[i].fecha = sillas[i].fecha_produccion;
+            unidades[i].cantidad = 1;
+        } else {
+            unidades[fechaPos].cantidad += 1;
+        }
+    }
 
-//     return 0;
-// }
-// int diaMasProductivo(Silla sillas[], int len) {
-//     Whatever whatevers[len];
+    AuxMasProduccion mayorRegistro = unidades[0];
+    int unidadesLen = sizeof(unidades) / sizeof(unidades[0]);
 
-//     for(int i = 0; i < len; i++) {
-//         whatevers[i].cantidad = lineas[i].cantidad;
-//         whatevers[i].fecha = lineas[i].fecha;
-//     }
+    for(int i = 1; i < unidadesLen; i++) {
+        if(unidades[i].cantidad > mayorRegistro.cantidad) {
+            mayorRegistro = unidades[i];
+        }
+    }
 
-//     Whatever max[0];
-//     for(int i = 1; i < len; i++) {
-//         if(whatevers[i].cantidad > max[i].cantidad) {
-//             max = whatevers[i];
-//         }
-//     }
-
-//     return max.fecha;
-// }
+    return mayorRegistro.fecha;
+}
